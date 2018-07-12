@@ -14,3 +14,11 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/* && apt-get clean \
   && wget -O /usr/local/bin/composer https://getcomposer.org/download/1.6.2/composer.phar \
   && chmod +x /usr/local/bin/composer
+
+# 安装 php zip 扩展
+
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+  && pecl install zip-1.15.3 \
+  && docker-php-ext-enable zip \
+  && rm -rf /var/lib/apt/lists/* && apt-get clean
